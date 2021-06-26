@@ -1,0 +1,60 @@
+from tkinter import *
+import requests
+import bs4
+
+#requesting site
+def site_data(url):
+    data=requests.get(url)
+    return data
+#scraping or taking data from website
+def india_vaccine_details():
+    url="https://www.mygov.in/covid-19"
+    data = site_data(url)
+    bs = bs4.BeautifulSoup(data.text,'html.parser')
+    info = bs.find("div", class_="yday-vcount").get_text()
+    info_0= bs.find("div", class_="total-vcount").get_text()
+    info_1 = bs.find("div", class_="test_box").get_text()
+    info_2 = bs.find("div", class_="information_row").find_all("div", class_="iblock")
+    all = "Country - India" + "\n" + "\n" + info +"\n"+ info_0 + info_1
+#deleting extra block of blank space
+    for block_1 in info_2:
+        delete = block_1.find("div", class_="per_block").decompose()
+#selecting specific block
+    for block in info_2:
+        count = block.find("span", class_ = "icount").get_text()
+        text = block.find("div", class_ = "info_label").get_text()
+
+        all = all + "\n" + text.strip() + " : " + count.strip() + "\n"
+
+
+    return all
+
+
+def Update():
+    new=india_vaccine_details()
+    print("updating.....")
+    mainLabel["text"]= new
+
+#size
+root = Tk()
+root.geometry("850x700")
+#logo
+root.iconbitmap("Corona.ico")
+#title
+root.title("PBL Group 10- Vaccine Live Data India")
+#font
+style = ("Gatty", 15 , "bold")
+#image or logo
+logo = PhotoImage(file= "bround.png")
+logoLabel = Label(root, image=logo,bg="white")
+logoLabel.place(x=0,y=0,relwidth=1,relheight=1)
+#button
+button1 = PhotoImage(file="button.png")
+button = Button(root,image= button1, bd=0, bg= "white",command=Update)
+button.place(x=335,y=625)
+
+#text content
+mainLabel = Label(root, text= india_vaccine_details(), font=style,bg="white")
+mainLabel.place(x=145,y=231,relwidth=0.678,relheight=0.544)
+
+root.mainloop()
