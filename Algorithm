@@ -1,0 +1,13 @@
+Algorithm 1 : 
+Step 1: Find the URL that you want to scrape
+Step 2: Inspecting the Page
+Step 3: Find the data you want to extract
+Step 4: Install required packages in Python IDE
+Step 5: Make HTTP request With the help of pakage “Request” 
+Step 6: Use “beautifulsoup” to scrap data from selected Website
+Step 7: Extract required data from website
+Step 8: With the help of Tkinter (GUI) create canvas
+Step 9: Add required content and images on canvas
+With help of Widgets.
+Step 10: After finishing the program, Use “Pyinstaller” to covert python file ‘.py’ to executable ‘.exe’
+Step 11: Use NSIS application to create installer for windows
