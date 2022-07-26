@@ -1,1 +1,1 @@
-# College-Projects
+# Corona-Cases-Tracker
